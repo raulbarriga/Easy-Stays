@@ -1,0 +1,26 @@
+{
+  "name": "airbnb-yt-sonny",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+***REMOVED***
+  "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "axios": "^1.5.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwind-scrollbar-hide": "^1.1.7"
+***REMOVED***
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
+  }
+}
