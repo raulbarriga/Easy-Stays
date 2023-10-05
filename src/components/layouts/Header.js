@@ -11,8 +11,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
+import { format } from "date-fns";
 
-const Header = () => {
+const Header = ({placeholder}) => {
   const [searchInput, setSearchInput] = useState("");
   // this resolved the issue of all dates being selected initially when setting state to null & trying to use the start/end date placeholders:
   // https://github.com/hypeserver/react-date-range/issues/330#issuecomment-802601417
@@ -38,13 +39,18 @@ const Header = () => {
   const searchHander = () => {
     // next.js also has a Link component as well (just in case)
     // we send the filtered search results via url so if the user shares the link url, they'll have the same search results (can't do that with redux)
+
+    // returns a string from the Date object with the desired date format
+    const formattedStartDate = format(startDate, "MM-dd-yyyy");
+    const formattedEndDate = format(endDate, "MM-dd-yyyy");
+
     router.push({
       pathname: "/search",
       query: {
         location: searchInput,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        numberOfGuests
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+        numberOfGuests,
 ***REMOVED***
     });
   ***REMOVED***
@@ -70,7 +76,7 @@ const Header = () => {
           onChange={(e) => setSearchInput(e.target.value)}
           type="text"
           className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
-          placeholder="Start Your Search"
+          placeholder={placeholder || "Start Your Search"} // shows the query params as a placeholder when they're selected
         />
         <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
       </div>
