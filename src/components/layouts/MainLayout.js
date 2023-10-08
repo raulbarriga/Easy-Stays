@@ -5,10 +5,10 @@ const MainLayout = ({ children, placeholder }) => {
   return (
     <>
       <Header placeholder={placeholder} />
-***REMOVED***children}
+      {children}
       <Footer />
     </>
   );
-***REMOVED***
+};
 
 export default MainLayout;

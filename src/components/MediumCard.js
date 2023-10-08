@@ -9,6 +9,6 @@ const MediumCard = ({ image, title }) => {
       <h3 className="text-2xl mt-3">{title}</h3>
     </div>
   );
-***REMOVED***
+};
 
 export default MediumCard;

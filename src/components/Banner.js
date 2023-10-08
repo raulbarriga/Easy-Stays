@@ -12,6 +12,6 @@ const Banner = () => {
       </div>
     </div>
   );
-***REMOVED***
+};
 
 export default Banner;

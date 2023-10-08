@@ -16,18 +16,18 @@ export default function Home({ smallCardData, cardsData }) {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <MainLayout>
-  ***REMOVED***/* Banner */}
+        {/* Banner */}
         <Banner />
 
         <main className="max-w-7xl mx-auto px-8 sm:px-16">
           <section className="pt-6">
             <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
-      ***REMOVED***/* pull data from api */}
-      ***REMOVED***/* for a home screen where data doesn't change much, we can use static rendering */}
-      ***REMOVED***/* for server-side rendering, every request that comes in will regenerate the page */}
-      ***REMOVED***/* static rendering caches it on the server & gives the same page */}
+            {/* pull data from api */}
+            {/* for a home screen where data doesn't change much, we can use static rendering */}
+            {/* for server-side rendering, every request that comes in will regenerate the page */}
+            {/* static rendering caches it on the server & gives the same page */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        ***REMOVED***smallCardData?.map(({ img, location, distance }, index) => (
+              {smallCardData?.map(({ img, location, distance }, index) => (
                 <SmallCard
                   key={index}
                   image={img}
@@ -40,7 +40,7 @@ export default function Home({ smallCardData, cardsData }) {
           <section>
             <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
             <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3">
-        ***REMOVED***cardsData?.map(({ img, title }, index) => (
+              {cardsData?.map(({ img, title }, index) => (
                 <MediumCard key={index} image={img} title={title} />
               ))}
             </div>
@@ -73,8 +73,8 @@ export async function getStaticProps() {
       props: {
         smallCardData,
         cardsData,
-***REMOVED***
-    ***REMOVED***
+      },
+    };
   } catch (error) {
     console.error("Error fetching data:", error);
 
@@ -82,7 +82,7 @@ export async function getStaticProps() {
     return {
       props: {
         error: "Error fetching data", // You can customize this error message
-***REMOVED***
-    ***REMOVED***
+      },
+    };
   }
 }

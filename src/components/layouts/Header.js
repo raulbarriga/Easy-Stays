@@ -26,14 +26,14 @@ const Header = ({placeholder}) => {
     startDate,
     endDate,
     key: "selection",
-  ***REMOVED***
+  };
 
   //receive the valeus the user's selecting, then update the startDate & endDate, respectively
   const handleSelect = (ranges) => {
     // .selection comes from the selectionRange.key variable's property (spelling/capitalization matters!)
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
-  ***REMOVED***
+  };
 
   const resetInput = () => setSearchInput("");
   const searchHander = () => {
@@ -51,13 +51,13 @@ const Header = ({placeholder}) => {
         startDate: formattedStartDate,
         endDate: formattedEndDate,
         numberOfGuests,
-***REMOVED***
+      },
     });
-  ***REMOVED***
+  };
 
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
-***REMOVED***/* left div */}
+      {/* left div */}
       <div
         onClick={() => router.push("/")}
         className="relative flex items-center h-10 cursor-pointer my-auto"
@@ -69,7 +69,7 @@ const Header = ({placeholder}) => {
           className="object-contain object-left"
         />
       </div>
-***REMOVED***/* middle div - Search */}
+      {/* middle div - Search */}
       <div className="flex items-center md:border-2 py-2 rounded-full md:shadow-sm">
         <input
           value={searchInput}
@@ -80,7 +80,7 @@ const Header = ({placeholder}) => {
         />
         <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
       </div>
-***REMOVED***/* right div */}
+      {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
         <p className="hidden md:inline cursor-pointer">Become a Host</p>
         <GlobeAltIcon className="h-6 cursor-pointer" />
@@ -89,8 +89,8 @@ const Header = ({placeholder}) => {
           <UserCircleIcon className="h-6" />
         </div>
       </div>
-***REMOVED***/* date range picker under the header's search box */}
-***REMOVED***searchInput && (
+      {/* date range picker under the header's search box */}
+      {searchInput && (
         <div className="flex flex-col col-span-3 mx-auto">
           <DateRangePicker
             ranges={[selectionRange]}
@@ -105,7 +105,7 @@ const Header = ({placeholder}) => {
             startDatePlaceholder={"Start Date"}
             endDatePlaceholder={"End Date"}
           />
-    ***REMOVED***/* TODO: for the backend, validate that the user only selected either 1 or 2 guests (in case they change the max value in the browser) */}
+          {/* TODO: for the backend, validate that the user only selected either 1 or 2 guests (in case they change the max value in the browser) */}
           <div className="flex items-center border-b mb-4">
             <h2 className="text-2xl flex-grow font-semibold">
               <label htmlFor="guests">Number of Guests:</label>
@@ -139,6 +139,6 @@ const Header = ({placeholder}) => {
       )}
     </header>
   );
-***REMOVED***
+};
 
 export default Header;

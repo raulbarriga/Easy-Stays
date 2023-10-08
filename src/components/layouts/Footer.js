@@ -35,6 +35,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-***REMOVED***
+};
 
 export default Footer;
