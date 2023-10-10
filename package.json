@@ -11,8 +11,8 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
     "@heroicons/react": "^1.0.6",
-    "axios": "^1.5.1",
     "date-fns": "^2.30.0",
+    "mapbox-gl": "^2.15.0",
     "next": "latest",
     "react": "latest",
     "react-date-range": "^1.4.0",

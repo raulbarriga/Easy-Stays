@@ -10,7 +10,7 @@ const Search = ({ searchResults }) => {
   // with getStaticProps(), the information on the web page can get outdated
   // look up incremental stack generation for more info
   const router = useRouter();
-  const { location, startDate, endDate, numberOfGuests } = router.query; // gives us the query url params
+  const { location, startDate, endDate, numberOfGuests } = router.query; // gives us the query url params,
   const range = `${startDate} - ${endDate}`;
   return (
     <MainLayout
@@ -53,7 +53,7 @@ const Search = ({ searchResults }) => {
           </div>
         </section>
 {/* hidden xl:inline-flex */}
-        <section className="">
+        <section className="hidden xl:inline-flex xl:min-w-[600]">
           <Map />
         </section>
       </main>

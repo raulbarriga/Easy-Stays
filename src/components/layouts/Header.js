@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import {
@@ -13,7 +15,7 @@ import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 
-const Header = ({placeholder}) => {
+const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
   // this resolved the issue of all dates being selected initially when setting state to null & trying to use the start/end date placeholders:
   // https://github.com/hypeserver/react-date-range/issues/330#issuecomment-802601417

@@ -17,9 +17,7 @@ const nextConfig = {
       },
     ],
   },
-  env: {
-    mapboxbox: process.env.MAPBOX_ACCESS_TOKEN,
-  },
+  appDir: "src/app",
 };
 
 module.exports = nextConfig;
