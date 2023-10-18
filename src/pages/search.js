@@ -1,5 +1,4 @@
 import InfoCard from "@/components/InfoCard";
-import Map from "@/components/Map";
 import MainLayout from "@/components/layouts/MainLayout";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -51,10 +50,6 @@ const Search = ({ searchResults }) => {
               )
             )}
           </div>
-        </section>
-{/* hidden xl:inline-flex */}
-        <section className="hidden xl:inline-flex xl:min-w-[600]">
-          <Map />
         </section>
       </main>
     </MainLayout>

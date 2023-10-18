@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
-    "@heroicons/react": "^2.0.18",
+    "@heroicons/react": "^1.0.6",
     "axios": "^1.5.1",
     "date-fns": "^2.30.0",
     "flowbite": "^1.8.1",

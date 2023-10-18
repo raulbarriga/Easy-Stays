@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import {
-  SearchIcon,
   GlobeAltIcon,
   MenuIcon,
   UserCircleIcon,
@@ -12,8 +11,9 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
+import DateRangeBox from "../DateRangeBox";
 
-const Header = ({placeholder}) => {
+const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
   // this resolved the issue of all dates being selected initially when setting state to null & trying to use the start/end date placeholders:
   // https://github.com/hypeserver/react-date-range/issues/330#issuecomment-802601417
@@ -70,16 +70,7 @@ const Header = ({placeholder}) => {
         />
       </div>
       {/* middle div - Search */}
-      <div className="flex items-center md:border-2 py-2 rounded-full md:shadow-sm">
-        <input
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          type="text"
-          className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
-          placeholder={placeholder || "Start Your Search"} // shows the query params as a placeholder when they're selected
-        />
-        <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
-      </div>
+      <DateRangeBox searchInput={searchInput} placeholder={placeholder} />
       {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
         <p className="hidden md:inline cursor-pointer">Become a Host</p>
@@ -121,7 +112,8 @@ const Header = ({placeholder}) => {
                   max="2"
                   id="guests"
                   name="guests"
-                  className="w-12 pl-2 outline-none text-lg text-red-400"
+                  style={{ boxShadow: "none" }}
+                  className="w-12 pl-2 border-none text-lg text-red-400"
                 />
               </div>
               <p className="mt-2 text-xs text-red-600">Max of 2 guests</p>

@@ -1,0 +1,4 @@
+- admin wants the option to change the avaialable dates to book
+-- this means, for example, she could have only weekends at first, then change it to only a couple days in the week like Mon., Tues., Wed., Thurs.
+-- users can only select from these available days
+-- also, users cannot select a date that's already booked by someone else
