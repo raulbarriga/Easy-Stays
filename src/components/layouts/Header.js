@@ -1,25 +1,24 @@
 import Image from "next/image";
 import { useState } from "react";
-import {
-  GlobeAltIcon,
-  MenuIcon,
-  UserCircleIcon,
-  UsersIcon,
-} from "@heroicons/react/solid";
+import { MenuIcon, UserCircleIcon } from "@heroicons/react/solid";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { format } from "date-fns";
 import DateRangeBox from "../DateRangeBox";
 
 const Header = ({ placeholder }) => {
-  const [searchInput, setSearchInput] = useState("");
+  const [startDateString, setStartDateString] = useState("");
+  const [endDateString, setEndDateString] = useState("");
   // this resolved the issue of all dates being selected initially when setting state to null & trying to use the start/end date placeholders:
   // https://github.com/hypeserver/react-date-range/issues/330#issuecomment-802601417
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(new Date(""));
   const [numberOfGuests, setNumberOfGuests] = useState(1);
+
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const selectionRange = {
@@ -54,35 +53,40 @@ const Header = ({ placeholder }) => {
       },
     });
   };
-
+  console.log("isOpen: ", isOpen);
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
+    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10 relative">
       {/* left div */}
-      <div
-        onClick={() => router.push("/")}
-        className="relative flex items-center h-10 cursor-pointer my-auto"
-      >
-        <Image
-          src="/images/Airbnb_Logo.png"
-          alt="logo"
-          fill
-          className="object-contain object-left"
-        />
+      {/*  flex items-center  */}
+      <div className="relative h-10 my-auto w-[128px]">
+        <Link href="/">
+          <Image
+            src="/images/Airbnb_Logo.png"
+            alt="logo"
+            fill
+            className="object-contain object-left"
+          />
+        </Link>
       </div>
       {/* middle div - Search */}
-      <DateRangeBox searchInput={searchInput} placeholder={placeholder} />
+      <DateRangeBox
+        startDateString={startDateString}
+        endDateString={endDateString}
+        setStartDateString={setStartDateString}
+        setEndDateString={setEndDateString}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
       {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
-        <p className="hidden md:inline cursor-pointer">Become a Host</p>
-        <GlobeAltIcon className="h-6 cursor-pointer" />
         <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
         </div>
       </div>
       {/* date range picker under the header's search box */}
-      {searchInput && (
-        <div className="flex flex-col col-span-3 mx-auto">
+      {isOpen && (
+        <div className="flex flex-col col-span-3 mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%]">
           <DateRangePicker
             ranges={[selectionRange]}
             shownDate={new Date()} // initially no date range will be selected
@@ -97,7 +101,7 @@ const Header = ({ placeholder }) => {
             endDatePlaceholder={"End Date"}
           />
           {/* TODO: for the backend, validate that the user only selected either 1 or 2 guests (in case they change the max value in the browser) */}
-          <div className="flex items-center border-b mb-4">
+          {/* <div className="flex items-center border-b mb-4">
             <h2 className="text-2xl flex-grow font-semibold">
               <label htmlFor="guests">Number of Guests:</label>
             </h2>
@@ -126,7 +130,7 @@ const Header = ({ placeholder }) => {
             <button onClick={searchHander} className="flex-grow text-red-400">
               Search
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </header>
