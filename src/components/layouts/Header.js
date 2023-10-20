@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MenuIcon, UserCircleIcon } from "@heroicons/react/solid";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { format } from "date-fns";
-import DateRangeBox from "../DateRangeBox";
+import DateRange from "../DateRange";
+import useClickOutside from "@/hooks/useClickOutside";
 
-const Header = ({ placeholder }) => {
+const Header = () => {
   const [startDateString, setStartDateString] = useState("");
   const [endDateString, setEndDateString] = useState("");
   // this resolved the issue of all dates being selected initially when setting state to null & trying to use the start/end date placeholders:
@@ -17,9 +17,25 @@ const Header = ({ placeholder }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(new Date(""));
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-
+  // to open/close the date range picker when I click on the date range input tag
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  // if(isOpen) {}
+  // const inputRef = useRef();
+  // const dateRangePickerComponentRef = useRef();
+  // const onClickOutside = () => {
+  //   console.log("Outside clicked");
+  //   // only call this function when the component is set to true (visible)
+  //   if (isOpen && !domNode.current.contains(event.target) && event.target !== inputRef.current) {
+  //     setIsOpen(false);
+  //   }
+  // };
+
+  // to close the date range picker component when I click outside of it
+  //
+  // inputRef, , dateRangePickerComponentRef
+  let domNode = useClickOutside(() => setIsOpen(false));
 
   const selectionRange = {
     startDate,
@@ -35,6 +51,7 @@ const Header = ({ placeholder }) => {
   };
 
   const resetInput = () => setSearchInput("");
+
   const searchHander = () => {
     // next.js also has a Link component as well (just in case)
     // we send the filtered search results via url so if the user shares the link url, they'll have the same search results (can't do that with redux)
@@ -53,9 +70,10 @@ const Header = ({ placeholder }) => {
       },
     });
   };
+
   console.log("isOpen: ", isOpen);
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10 relative">
+    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
       {/* left div */}
       {/*  flex items-center  */}
       <div className="relative h-10 my-auto w-[128px]">
@@ -69,13 +87,16 @@ const Header = ({ placeholder }) => {
         </Link>
       </div>
       {/* middle div - Search */}
-      <DateRangeBox
+      <DateRange
         startDateString={startDateString}
         endDateString={endDateString}
         setStartDateString={setStartDateString}
         setEndDateString={setEndDateString}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
+        domNode={domNode}
+        handleSelect={handleSelect}
+        selectionRange={selectionRange}
       />
       {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
@@ -85,54 +106,6 @@ const Header = ({ placeholder }) => {
         </div>
       </div>
       {/* date range picker under the header's search box */}
-      {isOpen && (
-        <div className="flex flex-col col-span-3 mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%]">
-          <DateRangePicker
-            ranges={[selectionRange]}
-            shownDate={new Date()} // initially no date range will be selected
-            staticRanges={[]} // to customize the buttons that appear next to the calendar (i.e. The "Yesterday", "Today", etc. buttons). Show none of them.
-            inputRanges={[]} // for the "days up to today" & "days starting today" input boxes
-            minDate={new Date()}
-            months={2} // shows 2 months next to each other
-            direction="horizontal" // makes the months be horizontal (default was vertical)
-            rangeColors={["#FD5B61"]}
-            onChange={handleSelect}
-            startDatePlaceholder={"Start Date"}
-            endDatePlaceholder={"End Date"}
-          />
-          {/* TODO: for the backend, validate that the user only selected either 1 or 2 guests (in case they change the max value in the browser) */}
-          {/* <div className="flex items-center border-b mb-4">
-            <h2 className="text-2xl flex-grow font-semibold">
-              <label htmlFor="guests">Number of Guests:</label>
-            </h2>
-            <div className="flex items-center flex-col">
-              <div className="flex items-center">
-                <UsersIcon className="h-5" />
-                <input
-                  value={numberOfGuests}
-                  onChange={(e) => setNumberOfGuests(e.target.value)}
-                  type="number"
-                  min="1"
-                  max="2"
-                  id="guests"
-                  name="guests"
-                  style={{ boxShadow: "none" }}
-                  className="w-12 pl-2 border-none text-lg text-red-400"
-                />
-              </div>
-              <p className="mt-2 text-xs text-red-600">Max of 2 guests</p>
-            </div>
-          </div>
-          <div className="flex">
-            <button onClick={resetInput} className="flex-grow text-gray-500">
-              Cancel
-            </button>
-            <button onClick={searchHander} className="flex-grow text-red-400">
-              Search
-            </button>
-          </div> */}
-        </div>
-      )}
     </header>
   );
 };
