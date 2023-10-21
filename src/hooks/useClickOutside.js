@@ -15,7 +15,7 @@ const useClickOutside = (inputRef, componentRef, setIsOpen) => {
         // both tags will not be considered a click outside because of their refs
         setIsOpen(false); // use this to close the component
         // console.log("outside was clicked");
-        // console.log("hook was called")
+        console.log("hook was called")
       }
     };
     
