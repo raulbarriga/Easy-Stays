@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-// source video at 11:58: https://www.youtube.com/watch?v=J-g9ZJha8FE&t=481s
 const useClickOutside = (inputRef, componentRef, setIsOpen) => {
   useEffect(() => {
+    // hook to compare 2 sibling ref tags
     const handleClick = (e) => {
-      // hook to compare 2 sibling ref tags
+      // think of it like this: what's considered a click outside?
+      // if e.target occurs inside the input tag, then that's not a click outside, let the input handle that onClick
+      // only call this hook if e.target is not inside the component AND the input ref
       if (
         componentRef.current &&
         !componentRef.current.contains(e.target) &&
@@ -13,6 +15,7 @@ const useClickOutside = (inputRef, componentRef, setIsOpen) => {
         // both tags will not be considered a click outside because of their refs
         setIsOpen(false); // use this to close the component
         // console.log("outside was clicked");
+        // console.log("hook was called")
       }
     };
     

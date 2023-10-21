@@ -27,7 +27,10 @@ const DateRange = ({
           id="date-range-chosen"
           value={startDateString}
           onChange={(e) => setStartDateString(e.target.value)}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            setIsOpen(!isOpen)
+            console.log("input was clicked")
+          }}
           type="text"
           className="flex-grow pl-5 pr-[32px] cursor-pointer text-sm text-gray-600 bg-gray-100 rounded-[3px]"
           // style={{ backgroundColor: "#ebebeb" }}

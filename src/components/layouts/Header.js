@@ -56,7 +56,8 @@ const Header = () => {
 
   console.log("isOpen: ", isOpen);
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
+    // white
+    <header className="sticky top-0 z-50 grid grid-cols-3 bg-zinc-900 text-white shadow-md p-5 md:px-10">
       {/* left div */}
       {/*  flex items-center  */}
       <div className="relative h-10 my-auto w-[128px]">

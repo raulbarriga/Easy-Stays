@@ -18,8 +18,8 @@ export default function Home({ smallCardData, cardsData }) {
       <MainLayout>
         {/* Banner */}
         <Banner />
-
-        <main className="max-w-7xl mx-auto px-8 sm:px-16">
+{/*  */}
+        <main className="max-w-7xl mx-auto px-8 sm:px-16 bg-zinc-900 text-white">
           <section className="pt-6">
             <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
             {/* pull data from api */}
