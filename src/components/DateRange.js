@@ -1,6 +1,7 @@
 // import { SearchIcon } from "@heroicons/react/solid";
+import useClickOutside from "@/hooks/useClickOutside";
 import { CalendarIcon } from "@heroicons/react/outline";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { DateRangePicker } from "react-date-range";
 
 const DateRange = ({
@@ -10,59 +11,35 @@ const DateRange = ({
   // setEndDateString,
   isOpen,
   setIsOpen,
-  domNode,
   handleSelect,
   selectionRange,
 }) => {
   const inputRef = useRef();
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (
-        !isOpen ||
-        inputRef.current && inputRef.current.contains(e.target) ||
-        domNode.current && domNode.current.contains(e.target)
-      ) {
-        return;
-      }
-
-      setIsOpen(false);
-    };
-
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [isOpen, setIsOpen, domNode]);
+  const componentRef = useRef();
+  useClickOutside(inputRef, componentRef, setIsOpen);
   return (
     <>
-      {/*  */}
-      <div className="flex flex-col items-center">
-        <div className="font-medium mr-[105px]">Choose Dates</div>
-        <label
-          htmlFor="date-range-chosen"
-          className="relative w-fit cursor-pointer"
-        >
-          <input
-            id="date-range-chosen"
-            value={startDateString}
-            onChange={(e) => setStartDateString(e.target.value)}
-            // isOpen? setIsOpen(false) : setIsOpen(true)
-            onClick={(e) => {
-              // e.preventDefault();
-              // e.stopPropagation(); // prevent the click event from bubbling up to the useClickOutside hook
-              setIsOpen(!isOpen);
-            }}
-            type="text"
-            className="flex-grow pl-5 pr-[32px] cursor-pointer text-sm text-gray-600 bg-gray-100 rounded-[3px]"
-            // style={{ backgroundColor: "#ebebeb" }}
-            ref={inputRef}
-          />
-          <CalendarIcon className="h-8 md:mx-2 p-2 absolute top-1/2 right-0 transform -translate-y-1/2" />
+      <div className="flex flex-col items-center relative">
+        <label htmlFor="date-range-chosen" className="mr-[105px] font-medium">
+          Choose Dates
         </label>
+        <input
+          id="date-range-chosen"
+          value={startDateString}
+          onChange={(e) => setStartDateString(e.target.value)}
+          onClick={() => setIsOpen(!isOpen)}
+          type="text"
+          className="flex-grow pl-5 pr-[32px] cursor-pointer text-sm text-gray-600 bg-gray-100 rounded-[3px]"
+          // style={{ backgroundColor: "#ebebeb" }}
+          ref={inputRef}
+        />
+        <CalendarIcon className="h-8 md:mx-2 p-2 absolute top-[43%] right-[27%]" />
         {/* <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" /> */}
       </div>
       {isOpen && (
         <div
           // // to close the component when I click outside of it
-          ref={domNode}
+          ref={componentRef}
           className="flex flex-col col-span-3 mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%]"
         >
           <DateRangePicker

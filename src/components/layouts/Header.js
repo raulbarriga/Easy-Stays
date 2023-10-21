@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { MenuIcon, UserCircleIcon } from "@heroicons/react/solid";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { format } from "date-fns";
 import DateRange from "../DateRange";
-import useClickOutside from "@/hooks/useClickOutside";
 
 const Header = () => {
   const [startDateString, setStartDateString] = useState("");
@@ -20,22 +19,6 @@ const Header = () => {
   // to open/close the date range picker when I click on the date range input tag
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
-  // if(isOpen) {}
-  // const inputRef = useRef();
-  // const dateRangePickerComponentRef = useRef();
-  // const onClickOutside = () => {
-  //   console.log("Outside clicked");
-  //   // only call this function when the component is set to true (visible)
-  //   if (isOpen && !domNode.current.contains(event.target) && event.target !== inputRef.current) {
-  //     setIsOpen(false);
-  //   }
-  // };
-
-  // to close the date range picker component when I click outside of it
-  //
-  // inputRef, , dateRangePickerComponentRef
-  let domNode = useClickOutside(() => setIsOpen(false));
 
   const selectionRange = {
     startDate,
@@ -94,7 +77,6 @@ const Header = () => {
         setEndDateString={setEndDateString}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
-        domNode={domNode}
         handleSelect={handleSelect}
         selectionRange={selectionRange}
       />
