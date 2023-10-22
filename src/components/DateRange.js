@@ -1,7 +1,8 @@
 // import { SearchIcon } from "@heroicons/react/solid";
 import useClickOutside from "@/hooks/useClickOutside";
+import useEvent from "@/hooks/useEvent";
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { DateRangePicker } from "react-date-range";
 
 const DateRange = ({
@@ -16,7 +17,24 @@ const DateRange = ({
 }) => {
   const inputRef = useRef();
   const componentRef = useRef();
+
   useClickOutside(inputRef, componentRef, setIsOpen);
+
+  const keypressHandler = useCallback(
+    ({ key }) => {
+      // for the DateRangePicker keyboard control
+      const ESCAPE_KEYS = ["27", "Escape"];
+
+      // e = e || window.event;
+      if (ESCAPE_KEYS.includes(String(key))) {
+        setIsOpen(false);
+        // console.log("Escape key pressed!");
+      }
+    },
+    [setIsOpen]
+  );
+
+  useEvent("keydown", keypressHandler);
 
   return (
     <>
@@ -69,12 +87,12 @@ const DateRange = ({
               <p className="mt-2 text-xs text-red-600">Max of 2 guests</p>
             </div> */}
             {/* p-2 */}
-            {/* text-black cursor-pointer ml-auto  mr-2 */}
+            {/* text-black cursor-pointer ml-auto  mr-2 hover:border-transparent zinc-900 */}
             <button
-              class="bg-transparent ml-auto mr-2 my-2 hover:bg-zinc-900 text-black font-semibold hover:text-white p-2 border border-black hover:border-transparent rounded-full"
+              className="bg-transparent ml-auto mr-2 my-2 hover:bg-[#eff2f7] text-[#34495e] font-semibold hover:text-[#34495e] p-2 border border-[#34495e] rounded-full"
               onClick={() => setIsOpen(false)}
             >
-              <XIcon className="h-6" />
+              <XIcon className="h-4 stroke-[2.5px]" />
             </button>
           </div>
           {/* <div className="flex">
