@@ -1,3 +1,5 @@
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import '@/styles/globals.css'
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";

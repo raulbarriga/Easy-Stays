@@ -7,13 +7,13 @@ import { DateRangePicker } from "react-date-range";
 
 const DateRange = ({
   startDateString,
-  setStartDateString,
-  // endDateString,
-  // setEndDateString,
+  endDateString,
   isOpen,
   setIsOpen,
   handleSelect,
   selectionRange,
+  searchInput,
+setSearchInput
 }) => {
   const inputRef = useRef();
   const componentRef = useRef();
@@ -36,6 +36,10 @@ const DateRange = ({
 
   useEvent("keydown", keypressHandler);
 
+  // searchInput = `${startDateString} - ${endDateString}`;
+
+  // todo: work on placing the selected date sets into the input box's value
+
   return (
     <>
       <div className="flex flex-col items-center relative">
@@ -44,8 +48,9 @@ const DateRange = ({
         </label>
         <input
           id="date-range-chosen"
-          value={startDateString}
-          onChange={(e) => setStartDateString(e.target.value)}
+          value={searchInput}
+          // e.target.value
+          onChange={(e) => setSearchInput(searchInput)}
           onClick={() => {
             setIsOpen(!isOpen);
             // console.log("input was clicked")

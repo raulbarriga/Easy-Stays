@@ -1,6 +1,6 @@
 import axios from "axios";
-
 import Head from "next/head";
+
 import Banner from "@/components/Banner";
 import SmallCard from "@/components/SmallCard";
 import MediumCard from "@/components/MediumCard";
