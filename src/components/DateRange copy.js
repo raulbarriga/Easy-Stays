@@ -6,12 +6,14 @@ import { useCallback, useRef } from "react";
 import { DateRangePicker } from "react-date-range";
 
 const DateRange = ({
+  startDateString,
+  endDateString,
   isOpen,
   setIsOpen,
   handleSelect,
   selectionRange,
-  dateRangeString,
-  resetInput,
+  searchInput,
+setSearchInput
 }) => {
   const inputRef = useRef();
   const componentRef = useRef();
@@ -34,23 +36,28 @@ const DateRange = ({
 
   useEvent("keydown", keypressHandler);
 
+  // searchInput = `${startDateString} - ${endDateString}`;
+
   // todo: work on placing the selected date sets into the input box's value
 
   return (
     <>
       <div className="flex flex-col items-center relative">
-        <div className="mr-[155px] text-black font-medium">Choose Dates</div>
+        <label htmlFor="date-range-chosen" className="mr-[105px] text-black font-medium">
+          Choose Dates
+        </label>
         <div
+          id="date-range-chosen"
+          onChange={() => setSearchInput(searchInput)}
           onClick={() => {
             setIsOpen(!isOpen);
             // console.log("input was clicked")
           }}
-          className="flex-grow md:border-2 py-2 pl-5 pr-[32px] md:shadow-sm cursor-pointer text-sm text-gray-600 bg-[#ebebeb] rounded-[3px] w-[260px]"
+          className="flex-grow pl-5 pr-[32px] cursor-pointer text-sm text-gray-600 bg-gray-100 rounded-[3px]"
+          // style={{ backgroundColor: "#ebebeb" }}
           ref={inputRef}
-        >
-          {dateRangeString}
-          <CalendarIcon className="h-8 md:mx-2 p-2 bg-[#ebebeb] absolute top-[43%] right-[20%] text-black" />
-        </div>
+        >{searchInput}</div>
+        <CalendarIcon className="h-8 md:mx-2 p-2 absolute top-[43%] right-[27%] text-black" />
         {/* <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" /> */}
       </div>
       {/* <button className="bg-white text-black">button</button> */}
@@ -84,7 +91,7 @@ const DateRange = ({
             {/* p-2 */}
             {/* text-black cursor-pointer ml-auto  mr-2 hover:border-transparent zinc-900 */}
             <button
-              className="bg-transparent ml-auto mr-3 my-2 hover:bg-[#eff2f7] text-[#34495e] font-semibold hover:text-[#34495e] p-2 border border-[#34495e] rounded-full"
+              className="bg-transparent ml-auto mr-2 my-2 hover:bg-[#eff2f7] text-[#34495e] font-semibold hover:text-[#34495e] p-2 border border-[#34495e] rounded-full"
               onClick={() => setIsOpen(false)}
             >
               <XIcon className="h-4 stroke-[2.5px]" />
@@ -112,11 +119,6 @@ const DateRange = ({
             startDatePlaceholder={"Start Date"}
             endDatePlaceholder={"End Date"}
           />
-          <div className="flex bg-white ">
-            <button onClick={resetInput} className="ml-3 my-2 text-gray-500">
-              Clear
-            </button>
-          </div>
           {/* TODO: for the backend, validate that the user only selected either 1 or 2 guests (in case they change the max value in the browser) */}
           {/* <div className="flex items-center border-b mb-4">
             <h2 className="text-2xl flex-grow font-semibold">

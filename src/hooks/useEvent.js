@@ -1,3 +1,4 @@
+// source: https://github.com/streamich/react-use/blob/master/src/useEvent.ts
 import { useEffect } from "react";
 import { isBrowser, off, on } from "../misc/util";
 
