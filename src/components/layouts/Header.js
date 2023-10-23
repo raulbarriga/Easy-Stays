@@ -100,6 +100,8 @@ const Header = () => {
         selectionRange={selectionRange}
         dateRangeString={dateRangeString}
         resetInput={resetInput}
+        numberOfGuests={numberOfGuests}
+        setNumberOfGuests={setNumberOfGuests}
       />
       {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
