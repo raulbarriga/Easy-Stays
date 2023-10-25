@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { format } from "date-fns";
 import DateRange from "../DateRange";
+import LogInSignUpModal from "../LogInSignUpModal";
 
 const Header = () => {
   // to convert the Date object into a string
@@ -20,6 +21,9 @@ const Header = () => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   // to open/close the date range picker when I click on the date range input tag
   const [isOpen, setIsOpen] = useState(false);
+  // is login/register component open
+  const [isLoginSignUpModalOpen, setIsLoginSignUpModalOpen] = useState(false);
+
   const router = useRouter();
 
   const selectionRange = {
@@ -106,10 +110,14 @@ const Header = () => {
       {/* right div */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
         <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
-          <MenuIcon className="h-6" />
-          <UserCircleIcon className="h-6" />
+          {/* <MenuIcon className="h-6" /> */}
+          <UserCircleIcon
+            onClick={() => setIsLoginSignUpModalOpen(!isLoginSignUpModalOpen)}
+            className="h-6 cursor-pointer"
+          />
         </div>
       </div>
+      {isLoginSignUpModalOpen && <LogInSignUpModal />}
       {/* date range picker under the header's search box */}
     </header>
   );
